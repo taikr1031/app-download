@@ -12,7 +12,7 @@
 				<key>kind</key>
 				<string>software-package</string>
 				<key>url</key>
-				<string>http://6wx8n8.natappfree.cc/app/%E7%BB%BC%E5%90%88%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86.ipa</string>
+				<string>http://6wx8n8.natappfree.cc/app/gwlc.ipa</string>
 			</dict>
 			<dict>
 				<key>kind</key>
@@ -20,7 +20,7 @@
 				<key>needs-shine</key>
 				<true/>
 				<key>url</key>
-				<string>https://enterprise.cloudpay.com.cn/app/packages/iphone-2x.png</string>
+				<string>http://6wx8n8.natappfree.cc/app/pic.jpg</string>
 			</dict>
 		</array>
 		<key>metadata</key>
@@ -32,7 +32,7 @@
 			<key>kind</key>
 			<string>software</string>
 			<key>title</key>
-			<string>这里写下你的包名称</string>
+			<string>测试包</string>
 		</dict>
 	</dict>
 </dict>
