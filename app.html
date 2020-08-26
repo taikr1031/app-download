@@ -60,17 +60,17 @@
 <script type="text/javascript">
 (function (ua) {
   // 可以利用ua模拟各终端情况{ua的值可以在userAgent.json文件中找各个终端的userAgent}
-  var baseUrl = 'http://zm.dev.whcyit.com/',
+  var baseUrl = 'https://github.com/taikr1031/app-download/',
       iosItemService = 'itms-services://?action=download-manifest&url=',
-      iosPlist = 'https://raw.githubusercontent.com/taikr1031/app-download/master/app.plist',
+      iosPlist = 'master/app.plist',
       // iosFileName = 'static/app/com.bonc.tzm.app_1.0.4.ipa',
-      androidFileName = 'app/android.apk',
+      androidFileName = 'master/android.apk',
       userAgent = ua || navigator.userAgent;
   // 下载ios安装包
   function getIOS () {
     alert('下载ios安装包')
-    // window.location.replace(iosItemService + baseUrl + iosPlist)
-    window.location.replace(iosItemService + iosPlist)
+    window.location.replace(iosItemService + baseUrl + iosPlist)
+    // window.location.replace(iosItemService + iosPlist)
   }
   // 下载android安装包
   function getAndroid () {
