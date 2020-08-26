@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>仙桃岗位流程app下载</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <style>
+    body, div, span, i {
+      font-size: 100%;
+      box-sizing: border-box;
+    }
+    .guide-wrap {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #666;
+    }
+    .guide-item {
+      display: block;
+      background: #fff;
+    }
+    .guide-text {
+      width: 15rem;
+      position: absolute;
+      top: 10%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+      padding: 0.4rem 1rem;
+      border-radius: 5rem;
+      border-top-right-radius: 1rem;
+      overflow: hidden;
+    }
+    .gudde-btn {
+      width: 10rem;
+      text-align: center;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      padding: 0.4rem 1rem;
+      border-radius: 5rem;
+      overflow: hidden;
+    }
+    @keyframes fade {
+      from {top: 0;}
+      to {top: 100vh;}
+    }
+    @-webkit-keyframes fade {
+      from {top: 0;}
+      to {top: 100vh;}
+    }
+    .wrap-fade {
+      animation: fade 3s ease-in;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+(function (ua) {
+  // 可以利用ua模拟各终端情况{ua的值可以在userAgent.json文件中找各个终端的userAgent}
+  var baseUrl = 'http://zm.dev.whcyit.com/',
+      iosItemService = 'itms-services://?action=download-manifest&url=',
+      iosPlist = 'https://raw.githubusercontent.com/taikr1031/app-download/master/app.plist',
+      // iosFileName = 'static/app/com.bonc.tzm.app_1.0.4.ipa',
+      androidFileName = 'app/android.apk',
+      userAgent = ua || navigator.userAgent;
+  // 下载ios安装包
+  function getIOS () {
+    alert('下载ios安装包')
+    // window.location.replace(iosItemService + baseUrl + iosPlist)
+    window.location.replace(iosItemService + iosPlist)
+  }
+  // 下载android安装包
+  function getAndroid () {
+    alert('下载android安装包')
+    window.location.replace(baseUrl + androidFileName)
+  }
+  /*
+    判断终端是否为IOS
+  */
+  function isIOS (UA) {
+    return !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+  }
+  /* 判断终端是否为Android */
+  function isAndroid (UA) {
+    return UA.indexOf('Android') > -1 || UA.indexOf('Linux') > -1;
+  }
+  /* 特例：判断是否为华为 - 用Android包, 但这会导致在win pc下 也会自动下载Android包 */
+  function isHuaWei (UA) {
+    return !!(UA.indexOf('Windows NT') > -1);
+  }
+  /*判断是否为微信或者QQ*/
+  function isWeChatOrQQ (UA) {
+    const ua = UA.toLowerCase();
+    if (ua.indexOf('micromessenger') > -1) {
+      // 如果是微信
+      // alert('是微信')
+      return true;
+    } else if (/mqqbrowser[\S|\s]*qq/.test(ua) || / qq/.test(ua)) {
+      alert('是QQ')
+
+      // 如果是QQ
+      return true;
+    }
+    return false;
+  }
+
+  /*
+  如果是微信或者QQ, 所进行的处理 - 进行引导信息的渲染
+  1- 设置遮罩提示信息
+  2- '亲，请点击右上角，选择“在浏览器中打开”，谢谢'
+  2-1 下方：按钮：“我知道了” - 并给该元素绑定点击事件，点击后销毁遮罩
+  3- 让右上角部分高亮
+  4- 画一条连接线，链接提示和右上角高亮区域
+  */
+  function getGuideRender () {
+    // 用于引导的
+    const guideHtmlStr = `
+                                    <div class="guide-wrap">
+                                      <span class="guide-item guide-text">亲，请点击右上角，选择“在浏览器中打开”，谢谢~</span>
+                                    </div>`;
+    document.write(guideHtmlStr);
+  }
+
+  // 功能脚本-根据终端进行下载
+  (function () {
+
+    if (isWeChatOrQQ(userAgent)) {
+      // 是微信或者QQ，使页面变为引导页，引导用户在浏览器中打开该链接
+      getGuideRender();
+    } else if (isAndroid(userAgent) || isHuaWei(userAgent)) {
+      // 浏览器环境，直接下载
+      getAndroid();
+    } else if (isIOS(userAgent)) {
+      getIOS();
+    } else {
+      alert('无法判断终端操作系统类型');
+      document.write('userAgent: \t', userAgent);
+    }
+  })()
+})()
+</script>
+</body>
+</html>
